@@ -11,6 +11,11 @@
 # Redirect output to stderr, uncomment for more output for debugging
 # exec 1>&2
 
+# Leaves dangling commits because the pre-commit already has
+# the HEAD hash in memory so a pull results in commit happening
+# against a non-existent HEAD
+git gc --prune=now --quiet
+
 output=$(git pull --no-rebase)
 
 # Handle non error output as otherwise it gets shown with any exit code by logseq
